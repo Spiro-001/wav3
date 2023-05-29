@@ -10,8 +10,12 @@ const Nav = (props) => {
     <nav className="sticky top-0 w-full bg-black border-b-2 flex justify-between h-fit items-center py-1.5 px-8">
       <span className="text-2xl">wav3</span>
       <ul className="h-fit flex gap-3">
-        {props.links.map((link) => (
-          <button onClick={() => router.push(`/${link}`)} className="nav-link">
+        {props.links.map((link, idx) => (
+          <button
+            key={idx}
+            onClick={() => router.push(`/${link.toLowerCase()}`)}
+            className="nav-link"
+          >
             {link}
           </button>
         ))}

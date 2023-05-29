@@ -89,6 +89,32 @@ html {
   color: rgb(var(--profile-text-color));
 }
 
+.link {
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ig {
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+}
+
+.yt {
+  background-color: red;
+}
+
+.sy {
+  background-color: #1db954;
+}
+
 #selected-month {
   background-color: rgb(var(--dropdown-color)) !important;
 }

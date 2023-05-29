@@ -1,24 +1,51 @@
 import React, { useEffect, useState } from "react";
+import Albums from "./Albums";
+import Bio from "./Bio";
+import FtTrack from "./FtTrack";
+import Highlight from "./Highlight";
+import MiniNav from "./MiniNav";
+import Playlist from "./Playlist";
+import Tracks from "./Tracks";
 
 const Profile = (props) => {
   const [user, setUser] = useState();
+  const [selector, setSelector] = useState(0);
   useEffect(() => {
     if (props.session) setUser(props.session.user);
   });
 
+  const returnSelector = () => {
+    switch (selector) {
+      case 0:
+        return <Bio />;
+      case 1:
+        return <FtTrack />;
+      case 2:
+        return <Tracks />;
+      case 3:
+        return <Albums />;
+      case 4:
+        return <Playlist />;
+      case 5:
+        return <Highlight />;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div className="border-2 border-white w-full lg:w-4/5 xl:w-2/3 h-full">
-      <div className="banner-image h-1/3 relative">
+    <div className="border-2 border-white w-full lg:w-4/5 xl:w-2/3 h-full flex flex-col">
+      <div className="banner-image h-64 relative">
         <img
           src="https://picsum.photos/1920/1080"
           alt="banner"
           className="object-cover h-full w-full select-none"
         />
-        <div className="profile-container absolute bottom-16 left-16 flex gap-x-12 items-end">
+        <div className="profile-container absolute bottom-12 left-14 flex gap-x-10 items-end">
           <img
             src="https://picsum.photos/300/300"
             alt="profile"
-            className="h-52 w-52 object-cover rounded-full select-none"
+            className="h-40 w-40 object-cover rounded-full select-none"
           />
           <div className="profile-info text-black">
             <div className="profile-text text-2xl py-1 px-3">
@@ -26,6 +53,10 @@ const Profile = (props) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="content-container px-12 h-full flex flex-col">
+        <MiniNav selector={selector} setSelector={setSelector} />
+        <div className="h-full">{returnSelector()}</div>
       </div>
     </div>
   );

@@ -41,11 +41,11 @@ const Profile = (props) => {
           alt="banner"
           className="object-cover h-full w-full select-none"
         />
-        <div className="profile-container absolute bottom-12 left-14 flex gap-x-10 items-end">
+        <div className="profile-container absolute bottom-12 left-14 flex gap-x-10 items-end h-40 w-40">
           <img
             src="https://picsum.photos/300/300"
             alt="profile"
-            className="h-40 w-40 object-cover rounded-full select-none"
+            className="object-cover h-full w-full rounded-full select-none"
           />
           <div className="profile-info text-black">
             <div className="profile-text text-2xl py-1 px-3">

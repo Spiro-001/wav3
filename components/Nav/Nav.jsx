@@ -1,14 +1,20 @@
 "use client";
 
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-const Nav = () => {
+const Nav = (props) => {
+  const router = useRouter();
   return (
-    <nav className="fixed top-0 w-full bg-black border-b-2 flex justify-between h-fit items-center py-3 px-8">
-      <span className="text-4xl">wav3</span>
-      <ul className="h-fit flex gap-6">
-        <span className="nav-link">Profile</span>
+    <nav className="sticky top-0 w-full bg-black border-b-2 flex justify-between h-fit items-center py-1.5 px-8">
+      <span className="text-2xl">wav3</span>
+      <ul className="h-fit flex gap-3">
+        {props.links.map((link) => (
+          <button onClick={() => router.push(`/${link}`)} className="nav-link">
+            {link}
+          </button>
+        ))}
         <button onClick={() => signOut()} className="nav-link">
           Sign Out
         </button>

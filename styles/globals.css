@@ -12,6 +12,7 @@
   --background-dot: 0, 0, 0;
   --background-container: 255, 255, 255;
   --dropdown-color: 71, 197, 255;
+  --profile-text-color: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +24,7 @@
     --background-dot: 255, 255, 255;
     --background-container: 0, 0, 0;
     --dropdown-color: 71, 197, 255;
+    --profile-text-color: 255, 255, 255;
   }
 }
 
@@ -40,6 +42,12 @@ html {
     rgb(var(--background-dot)) 1px,
     transparent 0
   );
+}
+
+.main-2 {
+  height: 100vh;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
 }
 
 .button {
@@ -68,12 +76,17 @@ html {
 
 .nav-link {
   border: 1px solid white;
-  padding: 12px 24px;
+  padding: 3px 18px;
   box-sizing: border-box;
 }
 
 .pause {
   animation-play-state: paused;
+}
+
+.profile-text {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: rgb(var(--profile-text-color));
 }
 
 #selected-month {

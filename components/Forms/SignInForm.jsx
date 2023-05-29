@@ -53,14 +53,13 @@ const SignInForm = () => {
       case "404":
         setErrors((prevErrors) => ({
           ...prevErrors,
-          username: "User not found.",
+          username: "Account does not exist.",
         }));
     }
   }, []);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     try {
       if (username.includes("@")) {
         const userInfo = { email: username, password: password };

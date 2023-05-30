@@ -9,6 +9,7 @@ const MiniNav = (props) => {
     "Albums",
     "Playlist",
     "Highlight",
+    "Media",
   ];
 
   const selectorRef = useRef();
@@ -16,7 +17,6 @@ const MiniNav = (props) => {
   const handleSectionClick = (idx) => {
     if (props.selector !== idx) {
       const getWidth = document.getElementById(idx);
-      console.log(getWidth.offsetLeft);
       props.setSelector(idx);
       gsap.to(selectorRef.current, {
         width: getWidth,
@@ -40,7 +40,7 @@ const MiniNav = (props) => {
   });
 
   return (
-    <div className="w-full border-white border-b flex gap-x-8 text-xl pt-4 px-2 pb-1 relative">
+    <div className="min-w-fit w-full border-white border-b flex gap-x-8 text-xl pt-4 px-2 pb-1 relative">
       <span
         className="absolute border-b-2 border-red-500 bottom-1 rounded-full"
         ref={selectorRef}
@@ -50,7 +50,7 @@ const MiniNav = (props) => {
           key={idx}
           onClick={() => handleSectionClick(idx)}
           id={idx}
-          className="cursor-pointer"
+          className="cursor-pointer whitespace-nowrap"
         >
           {section}
         </span>

@@ -5,6 +5,7 @@ import FtTrack from "./FtTrack";
 import Highlight from "./Highlight";
 import MiniNav from "./MiniNav";
 import Playlist from "./Playlist";
+import Media from "./Media";
 import Tracks from "./Tracks";
 
 const Profile = (props) => {
@@ -28,13 +29,15 @@ const Profile = (props) => {
         return <Playlist />;
       case 5:
         return <Highlight />;
+      case 6:
+        return <Media />;
       default:
         break;
     }
   };
 
   return (
-    <div className="border-2 border-white w-full lg:w-4/5 xl:w-2/3 h-full flex flex-col">
+    <div className="w-full lg:w-4/5 xl:w-2/3 h-full flex flex-col flex-1 max-sm:min-w-fit">
       <div className="banner-image h-64 relative">
         <img
           src="https://picsum.photos/1920/1080"
@@ -54,9 +57,9 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-      <div className="content-container px-12 h-full flex flex-col">
+      <div className="content-container px-12 h-full flex flex-col flex-1">
         <MiniNav selector={selector} setSelector={setSelector} />
-        <div className="h-full">{returnSelector()}</div>
+        <div className="h-full flex-1 flex flex-col">{returnSelector()}</div>
       </div>
     </div>
   );

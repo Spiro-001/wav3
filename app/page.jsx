@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
       {mounted ? (
-        <div className="main border-2 border-black w-full h-full flex flex-row flex-wrap items-center justify-center gap-x-12 font-notosans">
+        <div className="main border-2 border-black w-full h-full flex flex-row flex-wrap items-center justify-center gap-x-12">
           <div className="bg-black h-2/6 border-2 border-white flex items-center px-8">
             <span className="text-9xl">
               wav3
@@ -88,7 +88,7 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <div className="main border-2 border-black w-full h-full flex flex-row flex-wrap items-center justify-center gap-x-12 font-notosans"></div>
+        <div className="main border-2 border-black w-full h-full flex flex-row flex-wrap items-center justify-center gap-x-12"></div>
       )}
     </>
   );

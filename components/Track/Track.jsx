@@ -18,6 +18,8 @@ const Track = ({
   comments,
   isAlbum,
   songs,
+  isHighlight,
+  self,
 }) => {
   const [like, setLike] = useState(false);
   const [highlight, setHighlight] = useState(false);
@@ -28,8 +30,8 @@ const Track = ({
   return (
     <div
       className={`${
-        !isAlbum && isNew(date) ? "border-red-400" : "border-0"
-      } border-2 px-4 py-3 flex gap-x-4 w-full relative`}
+        !isAlbum && isNew(date) ? "border-red-400 border-2" : "border-0"
+      } px-4 py-3 flex gap-x-4 w-full relative`}
     >
       {!isAlbum && isNew(date) && (
         <span className="new-song px-1 absolute right-3 -top-3 text-red-400">
@@ -56,7 +58,23 @@ const Track = ({
           </span>
           <div className="flex flex-col flex-1">
             <div className="flex justify-between items-center">
-              <span className="text-sm">{artist}</span>
+              <span className="text-sm">
+                {isHighlight ? (
+                  <span className="flex gap-x-1">
+                    {self}{" "}
+                    <Image
+                      src="/PNG/w-highlight.png"
+                      width={16}
+                      height={16}
+                      className="object-contain"
+                      alt="highlight"
+                    />
+                    {artist}
+                  </span>
+                ) : (
+                  artist
+                )}
+              </span>
               <span className="text-sm">{formatDateAgo(date)}</span>
             </div>
             <div className="flex justify-between items-center">
@@ -145,7 +163,7 @@ const Track = ({
             </span>
           </div>
           <div className="flex gap-x-1 items-center">
-            <span className="text-sm bg-white flex text-black px-2 gap-x-1 items-center cursor-pointer rounded-sm">
+            <span className="text-sm bg-white flex text-black px-2 gap-x-1 items-center rounded-sm">
               <Image
                 src="/PNG/play.png"
                 width={18}

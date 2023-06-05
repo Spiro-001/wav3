@@ -141,6 +141,15 @@ body {
   font-family: "Noto Sans";
 }
 
+.more-image {
+  outline: 0;
+  padding: 0;
+}
+
+.more-image::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 #selected-month {
   background-color: rgb(var(--dropdown-color)) !important;
 }

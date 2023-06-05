@@ -21,6 +21,21 @@ const Post = () => {
   Suspendisse hendrerit est vitae ipsum consectetur, ut congue nibh
   scelerisque.`;
 
+  const images = [
+    {
+      link: "https://picsum.photos/id/0/1920/1080",
+    },
+    {
+      link: "https://picsum.photos/id/1/1920/1080",
+    },
+    {
+      link: "https://picsum.photos/id/2/1920/1080",
+    },
+    {
+      link: "https://picsum.photos/id/3/1920/1080",
+    },
+  ];
+
   return (
     <div className="flex flex-col border border-white p-6 rounded-lg">
       <div className="flex gap-x-6 flex-1">
@@ -51,7 +66,7 @@ const Post = () => {
             <Text content={text} />
             {/* <Photo /> */}
             {/* <Video /> */}
-            <Slideshow images={[1, 2, 3]} />
+            <Slideshow images={images} />
           </div>
         </div>
       </div>

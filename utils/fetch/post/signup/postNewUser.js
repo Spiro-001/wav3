@@ -1,8 +1,13 @@
-const postNewUser = (
+const postNewUser = async (
   props,
-  { username, email, year, month, day, password }
+  username,
+  email,
+  year,
+  month,
+  day,
+  password
 ) => {
-  fetch("/api/user/new", {
+  const newUser = await fetch("/api/user/new", {
     method: "POST",
     body: JSON.stringify({
       username: username,
@@ -13,6 +18,7 @@ const postNewUser = (
   })
     .then((res) => res.json())
     .then((data) => data);
+  return newUser;
 };
 
 export default postNewUser;

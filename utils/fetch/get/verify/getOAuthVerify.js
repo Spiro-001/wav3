@@ -1,4 +1,4 @@
-const getOAuthVerify = (router) => {
+const getOAuthVerify = (router, session) => {
   fetch(`/api/user/oauth/${session.user.id}`)
     .then((res) => res.json())
     .then((oAuthUser) => {

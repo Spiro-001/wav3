@@ -6,6 +6,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import Image from "next/image";
+import postNewUser from "@utils/fetch/post/signup/postNewUser";
+import patchConnectUserToWav from "@utils/fetch/patch/signup/patchConnectUserToWav";
+import postUsernameValid from "@utils/fetch/post/signup/postUsernameValid";
 
 const SignUpForm = (props, { link }) => {
   const router = useRouter();
@@ -14,6 +17,7 @@ const SignUpForm = (props, { link }) => {
   const [provider, setProvider] = useState("");
   const [formStep, setFormStep] = useState(1);
   const [alreadyTakenUsername, setAlreadyTakenUsername] = useState([]);
+  const [alreadyTakenEmail, setAlreadyTakenEmail] = useState([]);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -98,34 +102,22 @@ const SignUpForm = (props, { link }) => {
   }, [passwordStrength]);
 
   const handleFormSubmit = async () => {
-    console.log(username, email, month, day, year, password, confirmPassword);
     try {
-      const response = await fetch("/api/user/new", {
-        method: "POST",
-        body: JSON.stringify({
-          username: username,
-          email: props.link ? props.email : email,
-          dateOfBirth: year + "-" + month + "-" + day,
-          password: password,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => data);
-      const patchResponse = await fetch(
-        `/api/user/oauth/${searchParams.get("account_info")}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify({
-            wav3: response._id,
-          }),
-        }
+      debugger;
+      const response = await postNewUser(
+        props,
+        username,
+        email,
+        month,
+        day,
+        year,
+        password,
+        confirmPassword
       );
-      console.log(patchResponse);
+      const patchResponse = await patchConnectUserToWav(searchParams, response);
       signIn("credentials", { ...response, password, callbackUrl: "/" });
     } catch (error) {
-      console.log(router);
       setFormStep(1);
-      console.log("Could not create an account", error);
     }
   };
 
@@ -227,14 +219,7 @@ const SignUpForm = (props, { link }) => {
         username: "Username is already taken.",
       }));
     } else {
-      const usernameAvailable = await fetch("/api/user", {
-        method: "POST",
-        body: JSON.stringify({
-          username: username.toLowerCase(),
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => data);
+      const usernameAvailable = await postUsernameValid(username);
       if (usernameAvailable) {
         setAlreadyTakenUsername((prev) => [...prev, username.toLowerCase()]); // REDUCE SAME USERNAME FETCH CALLS
         setErrors((prevErrors) => ({
@@ -280,8 +265,24 @@ const SignUpForm = (props, { link }) => {
     }
   };
 
-  const handleEmailBlurInput = (ref) => {
+  const handleEmailBlurInput = async (ref) => {
     const emailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (alreadyTakenEmail.includes(email.toLowerCase())) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Email is already in use.",
+      }));
+    } else {
+      const emailAvailable = await postUsernameValid(email);
+      if (emailAvailable) {
+        setAlreadyTakenEmail((prev) => [...prev, email.toLowerCase()]); // REDUCE SAME USERNAME FETCH CALLS
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          email: "Email is already in use.",
+        }));
+      }
+    }
+
     if (!email.match(emailRegEx) && errors.email !== "") {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -398,15 +399,6 @@ const SignUpForm = (props, { link }) => {
                   className="form-input w-full max-w-md pt-4 h-fit text-lg"
                   ref={usernameInputRef}
                 />
-                {errors.username && (
-                  <Image
-                    src="/GIF/cancel.png"
-                    width={24}
-                    height={24}
-                    alt="invalid"
-                    className="absolute -right-3.5 pause bg-white"
-                  />
-                )}
               </label>
               <span className="text-red-600 text-xs relative left-2 font-semibold">
                 {errors.username}

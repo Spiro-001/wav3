@@ -1,6 +1,7 @@
 "use client";
 
 import SignUpForm from "@components/Forms/SignUpForm";
+import getOAuthVerify from "@utils/fetch/get/verify/getOAuthVerify";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -12,18 +13,7 @@ const verify = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(session);
-    if (session)
-      fetch(`/api/user/oauth/${session.user.id}`)
-        .then((res) => res.json())
-        .then((oAuthUser) => {
-          if (oAuthUser) {
-            setLoadProfile(oAuthUser);
-            router.push(
-              `/verify?has_wav3_link=false&account_info=${oAuthUser._id}&provider=${oAuthUser.provider}`
-            );
-          } else router.push("/feed");
-        });
+    if (session) getOAuthVerify(router, session);
   }, [session]);
 
   return (

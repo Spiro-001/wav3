@@ -70,30 +70,6 @@ const SignUpForm = (props, { link }) => {
     timelinePasswordStrengthBar.current = gsap.timeline({ paused: true });
 
     usernameInputRef.current?.focus();
-    // const splashTimeline = gsap.timeline();
-    // if (splashRef.current) {
-    //   splashTimeline.fromTo(
-    //     splashRef.current,
-    //     {
-    //       width: "0%",
-    //       color: "rgba(0, 0, 0, 0)",
-    //     },
-    //     {
-    //       width: "100%",
-    //       duration: 1,
-    //     }
-    //   );
-    //   splashTimeline.fromTo(
-    //     splashRef.current,
-    //     {
-    //       color: "rgba(0, 0, 0, 0)",
-    //     },
-    //     {
-    //       duration: 0.5,
-    //       color: "rgba(255, 255, 255, 1)",
-    //     }
-    //   );
-    // }
   }, []);
 
   useEffect(() => {

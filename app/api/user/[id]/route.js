@@ -15,3 +15,7 @@ import User from "@models/user";
 //     return new Response("Failed to update user", { status: 500 });
 //   }
 // };
+
+// export const GET = async (req, { params }) => {
+//   return new Response(params.id, { status: 200 });
+// };

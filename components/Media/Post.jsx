@@ -5,7 +5,7 @@ import Slideshow from "./Slideshow";
 import Text from "./Text";
 import Video from "./Video";
 
-const Post = () => {
+const Post = ({ views }) => {
   const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec leo nisi,
   pharetra eu mauris vitae, ultricies molestie sapien. Cras nisl nibh,
   commodo sed consequat ac, laoreet a dui. Morbi pharetra ex efficitur
@@ -38,6 +38,7 @@ const Post = () => {
 
   return (
     <div className="flex flex-col border border-white p-6 rounded-lg">
+      {views}
       <div className="flex gap-x-6 flex-1">
         <div className="w-12 h-12">
           <img

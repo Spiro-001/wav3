@@ -4,7 +4,6 @@ import verify from "@utils/firebase/verify";
 export const POST = async (req, { params }) => {
   try {
     const verifyStatus = verify(req);
-    console.log(verifyStatus.status);
     if (verifyStatus.ok) {
       const ref = firebaseDB
         .ref("views")

@@ -11,8 +11,6 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [providers, setProviders] = useState();
 
-  console.log(session);
-
   useEffect(() => {
     if (session === null) setMounted(true);
     else if (session?.user) router.push("/feed");

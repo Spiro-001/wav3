@@ -37,6 +37,7 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session, user }) {
+      await connectToDB();
       let sessionUser = await User.findOne({ email: session.user.email });
       if (!sessionUser) {
         sessionUser = await OAuthUser.findOne({ email: session.user.email });

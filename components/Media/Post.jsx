@@ -1,11 +1,31 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Photo from "./Photo";
 import Slideshow from "./Slideshow";
 import Text from "./Text";
 import Video from "./Video";
+import MediaBar from "@components/EffectBar/MediaBar";
 
-const Post = ({ views }) => {
+const Post = ({ post }) => {
+  const [like, setLike] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [comments, setComments] = useState(0);
+  const [highlights, setHighlights] = useState(0);
+  const [views, setViews] = useState("Loading");
+
+  useEffect(() => {
+    fetch("api/demoviews/0xewqe12e12", {
+      method: "POST",
+    })
+      .then(async (res) => {
+        if (res.ok) return res.json();
+        return await fetch("api/demoviews/0xewqe12e12")
+          .then((res) => res.json())
+          .then((views) => views);
+      })
+      .then((views) => setViews(views.total));
+  }, []);
+
   const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec leo nisi,
   pharetra eu mauris vitae, ultricies molestie sapien. Cras nisl nibh,
   commodo sed consequat ac, laoreet a dui. Morbi pharetra ex efficitur
@@ -38,7 +58,6 @@ const Post = ({ views }) => {
 
   return (
     <div className="flex flex-col border border-white p-6 rounded-lg">
-      {views}
       <div className="flex gap-x-6 flex-1">
         <div className="w-12 h-12">
           <img
@@ -68,6 +87,14 @@ const Post = ({ views }) => {
             {/* <Photo /> */}
             {/* <Video /> */}
             <Slideshow images={images} />
+            <MediaBar
+              views={views}
+              comments={comments}
+              highlights={highlights}
+              setLike={setLike}
+              like={like}
+              likes={likes}
+            />
           </div>
         </div>
       </div>

@@ -141,12 +141,16 @@ body {
   font-family: "Noto Sans";
 }
 
-.more-image {
+dialog {
   outline: 0;
   padding: 0;
 }
 
-.more-image::backdrop {
+.txt-area {
+  min-height: 96px;
+}
+
+dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.8);
 }
 

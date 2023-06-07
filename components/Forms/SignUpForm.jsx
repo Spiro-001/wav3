@@ -596,7 +596,7 @@ const SignUpForm = (props, { link }) => {
         break;
     }
   };
-  // sm:container
+
   return (
     <div className="flex flex-row sm:h-2/3 h-full shadow-md">
       <form
@@ -612,12 +612,6 @@ const SignUpForm = (props, { link }) => {
         </span>
         {returnFormByStep()}
       </form>
-      {/* <span
-        className="sm:flex text-9xl w-0 justify-center items-center bg-black border-white border-2 text-transparent hidden"
-        ref={splashRef}
-      >
-        wav3
-      </span> */}
     </div>
   );
 };

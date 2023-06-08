@@ -49,7 +49,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
           <AddMedia />
           <div className="flex justify-between">
             <button
-              className="px-3 rounded-md text-gray-400 text-base"
+              className="px-3 rounded-md text-gray-400 text-base hover:text-black transition-colors"
               onClick={confirmCancel}
             >
               Cancel

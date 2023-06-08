@@ -1,9 +1,11 @@
 import UserAction from "@components/Modals/UserAction";
 import gsap from "gsap";
+import { useRouter } from "next/navigation";
 import React, { useLayoutEffect, useRef, useState } from "react";
 
 const MiniNav = (props) => {
   const [openModal, setOpenModal] = useState(false);
+  const router = useRouter();
 
   const sectionList = [
     "Bio",
@@ -25,7 +27,6 @@ const MiniNav = (props) => {
       props.setSelector(idx);
       gsap.to(selectorRef.current, {
         width: getWidth,
-        left: getWidth.offsetLeft,
         duration: 0.2,
       });
       gsap.to(selectorRef.current, {
@@ -33,6 +34,7 @@ const MiniNav = (props) => {
         duration: 0.2,
         delay: 2,
       });
+      router.push(`/profile?tab=${idx}`);
     }
   };
 
@@ -43,8 +45,9 @@ const MiniNav = (props) => {
   useLayoutEffect(() => {
     const getWidth = document.getElementById(props.selector);
     gsap.to(selectorRef.current, {
+      left: getWidth.offsetLeft,
       width: getWidth.clientWidth,
-      duration: 0.1,
+      duration: 0.2,
     });
   });
 

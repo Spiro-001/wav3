@@ -7,13 +7,17 @@ import MiniNav from "./MiniNav";
 import Playlist from "./Playlist";
 import Media from "./Media";
 import Tracks from "./Tracks";
+import { useSearchParams } from "next/navigation";
 
 const Profile = (props) => {
   const [user, setUser] = useState();
   const [selector, setSelector] = useState(0);
+  const searchParams = useSearchParams();
+
   useEffect(() => {
+    searchParams.get("tab") && setSelector(parseInt(searchParams.get("tab")));
     if (props.session) setUser(props.session.user);
-  });
+  }, []);
 
   const returnSelector = () => {
     switch (selector) {

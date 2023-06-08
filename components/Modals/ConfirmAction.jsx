@@ -22,14 +22,14 @@ const ConfirmAction = forwardRef((props, ref) => {
     <dialog className="bg-transparent" ref={ref}>
       <div
         ref={confirmContainerRef}
-        className="border border-gray-400 rounded-md px-4 bg-white flex flex-col items-end gap-y-8 py-2"
+        className="border border-gray-400 rounded-md px-4 bg-white flex flex-col items-end gap-y-8 py-4"
       >
-        <span className="text-md font-semibold">
-          Are you sure you want to cancel this post?
+        <span className="text-md font-semibold w-full text-center">
+          Are you sure?
         </span>
         <div className="flex gap-x-2 text-base">
           <button
-            className="text-gray-400 px-2 rounded-md"
+            className="text-gray-400 px-2 rounded-md hover:text-black transition-colors"
             onClick={cancelAction}
           >
             Cancel

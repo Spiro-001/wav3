@@ -32,7 +32,7 @@ const Track = ({
     <div
       className={`${
         !isAlbum && isNew(date) ? "border-red-400 border-2" : "border-0"
-      } px-4 py-3 flex gap-x-4 w-full relative`}
+      } px-4 py-3 flex gap-x-4 w-full relative bg-white rounded`}
     >
       {!isAlbum && isNew(date) && (
         <span className="new-song px-1 absolute right-3 -top-3 text-red-400">
@@ -48,11 +48,11 @@ const Track = ({
       </div>
       <div className="song-info flex flex-col flex-1">
         <div className="flex flex-row gap-x-2 items-center mb-1">
-          <span className="text-sm bg-white flex text-black p-2 gap-x-1 items-center cursor-pointer rounded-sm">
+          <span className="text-sm bg-white flex text-black p-2 gap-x-1 items-center cursor-pointer rounded-sm dark:border-transparent border border-black">
             <Image
               src="/PNG/playbutton.png"
-              width={30}
-              height={30}
+              width={28}
+              height={28}
               className="object-contain"
               alt="play-button"
             />
@@ -67,7 +67,7 @@ const Track = ({
                       src="/PNG/w-highlight.png"
                       width={16}
                       height={16}
-                      className="object-contain"
+                      className="object-contain dark:brightness-100 brightness-0"
                       alt="highlight"
                     />
                     {artist}
@@ -80,7 +80,7 @@ const Track = ({
             </div>
             <div className="flex justify-between items-center">
               <span className="text-2xl">{title}</span>
-              <span className="text-sm bg-white text-black font-semibold border rounded-sm px-3">
+              <span className="text-sm bg-white text-black font-semibold border border-black dark:border-gray-400 rounded-sm px-3">
                 {tag && "#" + tag}
               </span>
             </div>
@@ -95,7 +95,7 @@ const Track = ({
           />
         </div>
         {isAlbum && (
-          <div className="album-container p-2 border-white border mt-1 flex flex-col gap-y-2 rounded-sm">
+          <div className="album-container p-2 dark:border-white border border-black bg-white dark:bg-neutral-900 mt-1 flex flex-col gap-y-2 rounded-sm">
             {songs.map((song, idx) => (
               <AlbumSong
                 key={idx}

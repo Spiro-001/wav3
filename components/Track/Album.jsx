@@ -27,7 +27,7 @@ const Album = ({
   return (
     <div
       className={`${
-        isNew(date) ? "border-red-400" : "border-transparent"
+        isNew(date) ? "border-red-400" : "border-none"
       } border-2 flex gap-x-4 w-full relative`}
     >
       {isNew(date) && (

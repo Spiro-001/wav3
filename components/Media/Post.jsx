@@ -57,7 +57,7 @@ const Post = ({ post }) => {
   ];
 
   return (
-    <div className="flex flex-col border border-white p-6 rounded-lg">
+    <div className="flex flex-col border dark:border-gray-400 border-gray-100 bg-white dark:bg-black p-6 rounded-lg">
       <div className="flex gap-x-6 flex-1">
         <div className="w-12 h-12">
           <img

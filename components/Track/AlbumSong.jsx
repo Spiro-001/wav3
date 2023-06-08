@@ -6,7 +6,7 @@ const AlbumSong = ({ title, order, plays, lastChild }) => {
   return (
     <div
       className={`flex justify-between items-center content-center ${
-        !lastChild && "border-b border-white pb-2"
+        !lastChild && "border-b border-black dark:border-white pb-2"
       }`}
     >
       <div className="flex gap-x-2 items-center">

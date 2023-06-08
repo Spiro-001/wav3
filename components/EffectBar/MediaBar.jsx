@@ -14,7 +14,7 @@ const MediaBar = ({
     <div className="flex justify-between">
       <div className="flex gap-x-1.5">
         <span
-          className="text-sm bg-white flex text-black px-2 gap-x-1 items-center cursor-pointer rounded-sm select-none"
+          className="text-sm bg-white flex border dark:border-white border-black text-black px-2 gap-x-1 items-center cursor-pointer rounded-sm select-none"
           onClick={() => setLike((prev) => !prev)}
         >
           <Image
@@ -26,7 +26,7 @@ const MediaBar = ({
           />
           {likes + like ? formatNumber(likes + like) : "Like"}
         </span>
-        <span className="text-sm bg-white flex text-black px-2 gap-x-1 items-center cursor-pointer rounded-sm select-none">
+        <span className="text-sm bg-white flex border dark:border-white border-black text-black px-2 gap-x-1 items-center cursor-pointer rounded-sm select-none">
           <Image
             src="/PNG/comment.png"
             width={14}
@@ -36,7 +36,7 @@ const MediaBar = ({
           />
           {comments ? formatNumber(comments) : "Comment"}
         </span>
-        <span className="text-sm bg-white flex text-black px-2 gap-x-1 items-center cursor-pointer rounded-sm select-none">
+        <span className="text-sm bg-white flex border dark:border-white border-black text-black px-2 gap-x-1 items-center cursor-pointer rounded-sm select-none">
           <Image
             src="/PNG/highlight.png"
             width={16}
@@ -48,7 +48,7 @@ const MediaBar = ({
         </span>
       </div>
       <div>
-        <span className="text-sm bg-white flex text-black px-2 gap-x-1 items-center rounded-sm select-none">
+        <span className="text-sm bg-white flex border dark:border-white border-black text-black px-2 gap-x-1 items-center rounded-sm select-none">
           <Image
             src="/PNG/bar-graph.png"
             width={16}

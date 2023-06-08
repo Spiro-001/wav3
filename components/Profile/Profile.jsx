@@ -61,7 +61,7 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-      <div className="content-container px-12 h-full flex flex-col flex-1">
+      <div className="content-container px-12 h-full flex flex-col flex-1 lg:w-full w-fit">
         <MiniNav selector={selector} setSelector={setSelector} />
         <div className="h-full flex-1 flex flex-col">{returnSelector()}</div>
       </div>

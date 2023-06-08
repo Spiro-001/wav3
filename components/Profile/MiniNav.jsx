@@ -52,7 +52,7 @@ const MiniNav = (props) => {
   });
 
   return (
-    <div className="min-w-fit w-full border-white border-b flex gap-x-8 text-xl pt-4 px-2 pb-1 relative items-center">
+    <div className="min-w-fit w-full border-black dark:border-white border-b flex gap-x-8 text-xl pt-4 px-2 pb-1 relative items-center">
       <span
         className="absolute border-b-2 border-red-500 bottom-1 rounded-full"
         ref={selectorRef}

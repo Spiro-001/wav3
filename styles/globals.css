@@ -6,25 +6,31 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 249, 246, 238;
   --background-end-rgb: 255, 255, 255;
   --border-color-rgb: 0, 0, 0;
   --background-dot: 0, 0, 0;
   --background-container: 255, 255, 255;
   --dropdown-color: 71, 197, 255;
   --profile-text-color: 255, 255, 255;
+  --nav-background-color: 255, 255, 245;
+  --nav-border: 237, 234, 222;
+  --border-button-color: 0, 0, 0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
+    --background-start-rgb: 27, 27, 27;
     --background-end-rgb: 0, 0, 0;
     --border-color-rgb: 255, 255, 255;
     --background-dot: 255, 255, 255;
     --background-container: 0, 0, 0;
     --dropdown-color: 71, 197, 255;
     --profile-text-color: 255, 255, 255;
+    --nav-background-color: 12, 4, 4;
+    --nav-border: 237, 234, 222;
+    --border-button-color: 255, 255, 255;
   }
 }
 
@@ -37,6 +43,12 @@ html {
 
 body {
   height: fit-content;
+}
+
+nav {
+  background-color: rgb(var(--nav-background-color));
+  border-bottom: 2px solid rgb(var(--nav-border));
+  margin-bottom: 12px;
 }
 
 .main {
@@ -84,7 +96,7 @@ body {
 }
 
 .nav-link {
-  border: 1px solid white;
+  border: 1px solid rgb(var(--border-button-color));
   padding: 3px 18px;
   box-sizing: border-box;
 }

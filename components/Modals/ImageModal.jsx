@@ -3,7 +3,6 @@ import useOnClickOutside from "@utils/useOnClickOutside/useOnClickOutside";
 import React, { forwardRef, useRef, useState } from "react";
 
 const ImageModal = forwardRef((props, ref) => {
-  const [slideShowCurrent, setSlideShowCurrent] = useState(0);
   const imageRef = useRef();
 
   useOnClickOutside(imageRef, () => {
@@ -12,9 +11,10 @@ const ImageModal = forwardRef((props, ref) => {
   });
 
   const handleNextImage = (direction, max) => {
-    if (slideShowCurrent + direction > max) setSlideShowCurrent(0);
-    else if (slideShowCurrent + direction < 0) setSlideShowCurrent(max);
-    else setSlideShowCurrent((prev) => prev + direction);
+    if (props.slideShowCurrent + direction > max) props.setSlideShowCurrent(0);
+    else if (props.slideShowCurrent + direction < 0)
+      props.setSlideShowCurrent(max);
+    else props.setSlideShowCurrent((prev) => prev + direction);
   };
   return (
     <dialog
@@ -33,10 +33,10 @@ const ImageModal = forwardRef((props, ref) => {
           src="/PNG/next.png"
           alt="next"
           className="absolute -left-20 cursor-pointer rotate-180"
-          onClick={() => handleNextImage(-1, 3)}
+          onClick={() => handleNextImage(-1, props.images.length - 1)}
         />
         <img
-          src={props.images[slideShowCurrent].link}
+          src={props.images[props.slideShowCurrent].link}
           alt="profile"
           className={`object-cover select-none h-full w-full rounded-md`}
         />
@@ -46,7 +46,7 @@ const ImageModal = forwardRef((props, ref) => {
           src="/PNG/next.png"
           alt="next"
           className="absolute -right-20 cursor-pointer"
-          onClick={() => handleNextImage(1, 3)}
+          onClick={() => handleNextImage(1, props.images.length - 1)}
         />
       </div>
     </dialog>

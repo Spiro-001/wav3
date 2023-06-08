@@ -32,7 +32,7 @@ const Track = ({
     <div
       className={`${
         !isAlbum && isNew(date) ? "border-red-400 border-2" : "border-0"
-      } px-4 py-3 flex gap-x-4 w-full relative bg-white rounded`}
+      } px-4 py-3 flex gap-x-4 w-full relative bg-white rounded dark:bg-black`}
     >
       {!isAlbum && isNew(date) && (
         <span className="new-song px-1 absolute right-3 -top-3 text-red-400">

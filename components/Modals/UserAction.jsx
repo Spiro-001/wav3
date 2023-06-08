@@ -1,6 +1,7 @@
 import useOnClickOutside from "@utils/useOnClickOutside/useOnClickOutside";
 import React, { useEffect, useRef, useState } from "react";
 import CreatePost from "./CreatePost";
+import UploadSong from "./UploadSong";
 
 const UserAction = ({ open, close }) => {
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -18,12 +19,13 @@ const UserAction = ({ open, close }) => {
   return (
     <dialog ref={userActionRef} className="bg-transparent h-2/4 w-96">
       <div ref={contentActionRef} className="rounded-md bg-white h-full w-full">
-        <CreatePost
+        {/* <CreatePost
           close={close}
           modalRef={userActionRef}
           openConfirm={openConfirm}
           setOpenConfirm={setOpenConfirm}
-        />
+        /> */}
+        <UploadSong />
       </div>
     </dialog>
   );

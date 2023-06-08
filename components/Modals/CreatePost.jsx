@@ -6,6 +6,7 @@ import ConfirmAction from "./ConfirmAction";
 const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
   const [body, setBody] = useState("");
   const [confirm, setConfirm] = useState(false);
+  const [showLength, setShowLength] = useState(false);
   const confirmRef = useRef();
 
   useEffect(() => {
@@ -35,9 +36,11 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
         <div className="h-full w-full py-3 px-4 flex flex-col gap-y-2 justify-between">
           <div className="flex justify-between items-center">
             <span className="font-bold">What's on your mind?</span>
-            <span className="text-xs bg-white border border-gray-400 px-2 rounded py-0.5">
-              {body.length} / 250
-            </span>
+            {showLength && (
+              <span className="text-xs bg-white border border-gray-400 px-2 rounded py-0.5">
+                {body.length} / 250
+              </span>
+            )}
           </div>
           <DragDropFile />
           <textarea
@@ -45,6 +48,8 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
             className="txt-area w-full border border-gray-400 rounded focus:outline-blue-400 resize-none py-2 px-2 pb-4 text-sm"
             value={body}
             onChange={(e) => setBody(e.target.value)}
+            onFocus={() => setShowLength(true)}
+            onBlur={() => setShowLength(false)}
           />
           <AddMedia />
           <div className="flex justify-between">

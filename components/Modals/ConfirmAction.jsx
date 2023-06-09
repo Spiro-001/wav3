@@ -22,11 +22,9 @@ const ConfirmAction = forwardRef((props, ref) => {
     <dialog className="bg-transparent" ref={ref}>
       <div
         ref={confirmContainerRef}
-        className="border border-gray-400 rounded-md px-4 bg-white flex flex-col items-end gap-y-4 py-4"
+        className="border border-gray-400 rounded-md px-4 bg-white flex flex-col items-end gap-y-4 py-4 cursor-default"
       >
-        <span className="text-md font-semibold w-full text-center">
-          Are you sure?
-        </span>
+        <span className="text-md font-semibold w-full px-2">Are you sure?</span>
         <div className="flex gap-x-2 text-base">
           <button
             className="text-gray-400 px-2 rounded-md hover:text-black transition-colors"

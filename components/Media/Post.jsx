@@ -5,6 +5,8 @@ import Slideshow from "./Slideshow";
 import Text from "./Text";
 import Video from "./Video";
 import MediaBar from "@components/EffectBar/MediaBar";
+import MoreOptions from "@components/Window/MoreOptions";
+import { deletePostById } from "@utils/fetch/delete/post/deletePostById";
 
 const Post = ({ post }) => {
   const [like, setLike] = useState(false);
@@ -15,6 +17,7 @@ const Post = ({ post }) => {
   const [body, setBody] = useState(post.body);
   const [images, setImages] = useState(post.images);
   const [video, setVideo] = useState(post.video);
+  const [openMoreOptions, setOpenMoreOptions] = useState(false);
 
   useEffect(() => {
     fetch(`api/demoviews/${post._id}`, {
@@ -44,6 +47,14 @@ const Post = ({ post }) => {
   //   },
   // ];
 
+  const handleMoreOptions = () => {
+    setOpenMoreOptions((prev) => !prev);
+  };
+
+  const handleDeletePost = (post) => {
+    deletePostById(post._id);
+  };
+
   return (
     <div className="flex flex-col border dark:border-gray-400 border-gray-100 bg-white dark:bg-black p-6 rounded-lg">
       <div className="flex gap-x-6 flex-1">
@@ -62,13 +73,29 @@ const Post = ({ post }) => {
             </div>
             <span className="font-light text-gray-400">•</span>
             <span className="text-lg font-light text-gray-400">1h</span>
-            <Image
-              src="/PNG/g-more.png"
-              width={28}
-              height={28}
-              className="object-contain ml-auto"
-              alt="more"
-            />
+            <div className="ml-auto relative">
+              <Image
+                src="/PNG/g-more.png"
+                width={28}
+                height={28}
+                className="object-contain cursor-pointer"
+                alt="more"
+                onClick={handleMoreOptions}
+              />
+
+              <MoreOptions
+                options={[
+                  {
+                    name: "Delete Post",
+                    function: () => handleDeletePost(post),
+                    confirm: true,
+                  },
+                  { name: "Edit Post", function: () => {}, confirm: false },
+                ]}
+                open={setOpenMoreOptions}
+                opened={openMoreOptions}
+              />
+            </div>
           </div>
           <div className="flex flex-col gap-y-4 pr-8 pt-2">
             <Text content={body} />

@@ -7,19 +7,31 @@ import MiniNav from "./MiniNav";
 import Playlist from "./Playlist";
 import Media from "./Media";
 import Tracks from "./Tracks";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { set } from "mongoose";
+import { useSelector } from "react-redux";
 
 const Profile = (props) => {
   const [user, setUser] = useState();
   const [selector, setSelector] = useState(0);
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
+    console.log(props.session);
     searchParams.get("tab") && setSelector(parseInt(searchParams.get("tab")));
     if (props.session) setUser(props.session.user);
-  }, []);
+    else {
+      const retryUser = setInterval(() => {
+        console.log(props.session, user);
+        setUser(false);
+      }, 5000);
+      clearInterval(retryUser);
+    }
+  }, [user]);
 
-  const returnSelector = () => {
+  const returnSelector = (user) => {
     switch (selector) {
       case 0:
         return <Bio user={user} />; // REDUX STORE IN THE FUTURE TO REMOVE THE USE OF PROPS
@@ -63,7 +75,11 @@ const Profile = (props) => {
       </div>
       <div className="content-container px-12 h-full flex flex-col flex-1 lg:w-full w-fit dark:bg-zinc-950 bg-stone-200">
         <MiniNav selector={selector} setSelector={setSelector} />
-        <div className="h-full flex-1 flex flex-col">{returnSelector()}</div>
+        {user && (
+          <div className="h-full flex-1 flex flex-col">
+            {returnSelector(user)}
+          </div>
+        )}
       </div>
     </div>
   );

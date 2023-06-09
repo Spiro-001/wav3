@@ -5,19 +5,19 @@ import Footer from "./Footer";
 import { getPostByUserId } from "@utils/fetch/get/post/getPostByUserId";
 import { Skeleton, ThemeProvider, createTheme } from "@mui/material";
 import LoadingMedia from "./Loading/LoadingMedia";
+import { useRouter } from "next/navigation";
 
 const Media = ({ user }) => {
   const [posts, setPosts] = useState(null);
   const [spot, setSpot] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const getPost = async () => {
       setPosts(await getPostByUserId(user, spot));
       setSpot((prev) => prev + process.env.LOAD_POST_AMOUNT);
     };
-    if (user) {
-      getPost();
-    }
+    if (user) getPost();
   }, []);
 
   return (

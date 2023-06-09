@@ -11,7 +11,10 @@ const UserAction = ({ open, close }) => {
   const contentActionRef = useRef();
 
   useOnClickOutside(contentActionRef, () => {
-    close(false);
+    if (userActionRef.current.open && option !== 0) setOpenConfirm(true);
+    else {
+      close(false);
+    }
   });
 
   useEffect(() => {

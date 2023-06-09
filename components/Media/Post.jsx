@@ -12,49 +12,37 @@ const Post = ({ post }) => {
   const [comments, setComments] = useState(0);
   const [highlights, setHighlights] = useState(0);
   const [views, setViews] = useState("Loading");
+  const [body, setBody] = useState(post.body);
+  const [images, setImages] = useState(post.images);
+  const [video, setVideo] = useState(post.video);
 
   useEffect(() => {
-    fetch("api/demoviews/0xewqe12e12", {
+    fetch(`api/demoviews/${post._id}`, {
       method: "POST",
     })
       .then(async (res) => {
         if (res.ok) return res.json();
-        return await fetch("api/demoviews/0xewqe12e12")
+        return await fetch(`api/demoviews/${post._id}`)
           .then((res) => res.json())
           .then((views) => views);
       })
       .then((views) => setViews(views.total));
   }, []);
 
-  const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec leo nisi,
-  pharetra eu mauris vitae, ultricies molestie sapien. Cras nisl nibh,
-  commodo sed consequat ac, laoreet a dui. Morbi pharetra ex efficitur
-  eleifend rhoncus. Etiam gravida elit in sem ullamcorper, vitae mollis mi
-  aliquet. Nam ultricies ligula in dui dictum tincidunt. Pellentesque vitae
-  varius velit. Phasellus rutrum mauris tellus, non tristique felis
-  consequat sit amet. Vivamus vel egestas mi. Phasellus dapibus mi eget
-  fermentum blandit. Nullam at lorem et velit elementum tincidunt. Vivamus
-  convallis et mauris vitae lacinia. Cras imperdiet ultrices ante, et mollis
-  risus suscipit ac. Integer id mattis lacus. Sed convallis, massa quis
-  auctor ornare, ex quam mattis metus, sed aliquet dolor massa consequat
-  metus. Curabitur fermentum pretium enim, in euismod ex accumsan eget.
-  Suspendisse hendrerit est vitae ipsum consectetur, ut congue nibh
-  scelerisque.`;
-
-  const images = [
-    {
-      link: "https://picsum.photos/id/0/1920/1080",
-    },
-    {
-      link: "https://picsum.photos/id/1/1920/1080",
-    },
-    {
-      link: "https://picsum.photos/id/2/1920/1080",
-    },
-    {
-      link: "https://picsum.photos/id/3/1920/1080",
-    },
-  ];
+  // const images = [
+  //   {
+  //     link: "https://picsum.photos/id/0/1920/1080",
+  //   },
+  //   {
+  //     link: "https://picsum.photos/id/1/1920/1080",
+  //   },
+  //   {
+  //     link: "https://picsum.photos/id/2/1920/1080",
+  //   },
+  //   {
+  //     link: "https://picsum.photos/id/3/1920/1080",
+  //   },
+  // ];
 
   return (
     <div className="flex flex-col border dark:border-gray-400 border-gray-100 bg-white dark:bg-black p-6 rounded-lg">
@@ -83,10 +71,10 @@ const Post = ({ post }) => {
             />
           </div>
           <div className="flex flex-col gap-y-4 pr-8 pt-2">
-            <Text content={text} />
-            {/* <Photo /> */}
-            {/* <Video /> */}
-            <Slideshow images={images} />
+            <Text content={body} />
+            {post.type.includes("PHOTO") && <Photo />}
+            {post.type.includes("VIDEO") && <Video />}
+            {post.type.includes("PHOTOS") && <Slideshow images={images} />}
             <MediaBar
               views={views}
               comments={comments}

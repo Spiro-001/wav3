@@ -8,14 +8,14 @@ export const POST = async (req, res) => {
   try {
     await connectToDB();
     const userExists = await User.findOne({
-      email: email,
+      email,
     });
     if (!userExists) {
       const passwordDigest = await hashPass(password);
       const newUser = await User.create({
-        email: email,
-        username: username,
-        dateOfBirth: dateOfBirth,
+        email,
+        username,
+        dateOfBirth,
         password_digest: passwordDigest,
       });
       return new Response(JSON.stringify(newUser), { status: 200 });

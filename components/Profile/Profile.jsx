@@ -22,19 +22,19 @@ const Profile = (props) => {
   const returnSelector = () => {
     switch (selector) {
       case 0:
-        return <Bio />;
+        return <Bio user={user} />; // REDUX STORE IN THE FUTURE TO REMOVE THE USE OF PROPS
       case 1:
-        return <FtTrack />;
+        return <FtTrack user={user} />;
       case 2:
-        return <Tracks />;
+        return <Tracks user={user} />;
       case 3:
-        return <Albums />;
+        return <Albums user={user} />;
       case 4:
-        return <Playlist />;
+        return <Playlist user={user} />;
       case 5:
-        return <Highlight />;
+        return <Highlight user={user} />;
       case 6:
-        return <Media />;
+        return <Media user={user} />;
       default:
         break;
     }

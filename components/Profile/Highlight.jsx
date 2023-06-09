@@ -2,10 +2,12 @@ import Track from "@components/Track/Track";
 import React from "react";
 import Container from "./Container";
 import Footer from "./Footer";
+import LoadingTrack from "./Loading/LoadingTrack";
 
 const Highlight = () => {
   return (
     <Container>
+      {/* <LoadingTrack /> */}
       <Track
         title={"Lion We"}
         artist={"Rye"}

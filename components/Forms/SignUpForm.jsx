@@ -591,7 +591,6 @@ const SignUpForm = (props, { link }) => {
             />
           </div>
         );
-        break;
       default:
         break;
     }

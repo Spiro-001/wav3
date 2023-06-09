@@ -29,7 +29,7 @@
     --dropdown-color: 71, 197, 255;
     --profile-text-color: 255, 255, 255;
     --nav-background-color: 12, 4, 4;
-    --nav-border: 237, 234, 222;
+    --nav-border: 53, 57, 53;
     --border-button-color: 255, 255, 255;
   }
 }
@@ -48,7 +48,6 @@ body {
 nav {
   background-color: rgb(var(--nav-background-color));
   border-bottom: 2px solid rgb(var(--nav-border));
-  margin-bottom: 12px;
 }
 
 .main {
@@ -99,6 +98,7 @@ nav {
   border: 1px solid rgb(var(--border-button-color));
   padding: 3px 18px;
   box-sizing: border-box;
+  border-radius: 8px;
 }
 
 .pause {
@@ -145,7 +145,6 @@ nav {
 }
 
 .title-border {
-  background-color: rgb(var(--background-start-rgb));
 }
 
 .lt {

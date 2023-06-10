@@ -8,10 +8,12 @@ import React from "react";
 const page = () => {
   const { data: session } = useSession();
 
+  console.log(session);
+
   return (
     <div className="main-2 max-sm:w-fit w-full h-full flex flex-col sm:items-center box-border">
       <Nav links={["Profile"]} />
-      <Profile session={session} />
+      {session && <Profile session={session} />}
     </div>
   );
 };

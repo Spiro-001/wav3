@@ -8,7 +8,7 @@ import MediaBar from "@components/EffectBar/MediaBar";
 import MoreOptions from "@components/Window/MoreOptions";
 import { deletePostById } from "@utils/fetch/delete/post/deletePostById";
 
-const Post = ({ post }) => {
+const Post = ({ post, idx }) => {
   const [like, setLike] = useState(false);
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState(0);
@@ -52,7 +52,7 @@ const Post = ({ post }) => {
   };
 
   const handleDeletePost = (post) => {
-    deletePostById(post._id);
+    return deletePostById(post._id);
   };
 
   return (
@@ -82,7 +82,6 @@ const Post = ({ post }) => {
                 alt="more"
                 onClick={handleMoreOptions}
               />
-
               <MoreOptions
                 options={[
                   {
@@ -94,6 +93,7 @@ const Post = ({ post }) => {
                 ]}
                 open={setOpenMoreOptions}
                 opened={openMoreOptions}
+                idx={idx}
               />
             </div>
           </div>

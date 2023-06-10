@@ -1,22 +1,25 @@
 import ConfirmAction from "@components/Modals/ConfirmAction";
+import { removePost } from "@redux/features/postSlice";
 import useOnClickOutside from "@utils/useOnClickOutside/useOnClickOutside";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const MoreOptions = ({ options, open, opened }) => {
+const MoreOptions = ({ options, open, opened, idx }) => {
   const [confirm, setConfirm] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const [onCompleteFunction, setOnCompleteFunction] = useState(() => {});
   const moreOptionRef = useRef();
   const confirmActionRef = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const confirmComplete = async () => {
       const data = await onCompleteFunction.function();
-      console.log(data);
       return data;
     };
     if (confirm) {
       confirmComplete();
+      dispatch(removePost(idx));
       setConfirm(false);
       setOpenConfirm(false);
     }
@@ -30,7 +33,6 @@ const MoreOptions = ({ options, open, opened }) => {
     if (option.confirm) {
       setOnCompleteFunction(option);
       setOpenConfirm(true);
-      console.log(confirm);
     } else {
       option.function();
       open(false);
@@ -40,7 +42,9 @@ const MoreOptions = ({ options, open, opened }) => {
   return (
     <>
       <div
-        className="absolute right-0 w-fit whitespace-nowrap dark:bg-neutral-700 bg-white border-gray-100 dark:border-neutral-600 border rounded flex flex-col"
+        className={`absolute right-0 w-fit whitespace-nowrap dark:bg-neutral-700 bg-white border-gray-100 dark:border-neutral-600 ${
+          opened && "border"
+        } rounded flex flex-col`}
         ref={moreOptionRef}
       >
         {opened &&
@@ -58,6 +62,7 @@ const MoreOptions = ({ options, open, opened }) => {
         ref={confirmActionRef}
         setConfirm={setConfirm}
         openConfirm={openConfirm}
+        setOpenConfirm={setOpenConfirm}
       />
     </>
   );

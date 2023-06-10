@@ -5,8 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { logIn } from "@redux/features/userSlice";
 
 const SignInForm = () => {
   const router = useRouter();
@@ -24,8 +22,6 @@ const SignInForm = () => {
     username: "",
     password: "",
   });
-
-  const dispatch = useDispatch();
 
   const timelineUsername = useRef();
   const timelinePassword = useRef();

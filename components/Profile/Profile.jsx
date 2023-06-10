@@ -7,28 +7,16 @@ import MiniNav from "./MiniNav";
 import Playlist from "./Playlist";
 import Media from "./Media";
 import Tracks from "./Tracks";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { set } from "mongoose";
-import { useSelector } from "react-redux";
+import { useSearchParams } from "next/navigation";
 
 const Profile = (props) => {
   const [user, setUser] = useState();
   const [selector, setSelector] = useState(0);
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
-    console.log(props.session);
     searchParams.get("tab") && setSelector(parseInt(searchParams.get("tab")));
     if (props.session) setUser(props.session.user);
-    else {
-      const retryUser = setInterval(() => {
-        console.log(props.session, user);
-        setUser(false);
-      }, 5000);
-      clearInterval(retryUser);
-    }
   }, [user]);
 
   const returnSelector = (user) => {

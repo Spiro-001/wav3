@@ -2,6 +2,7 @@
 
 import Nav from "@components/Nav/Nav";
 import Profile from "@components/Profile/Profile";
+import { timeNow } from "@utils/numbers/dateAgoFormat";
 import { useSession } from "next-auth/react";
 import React from "react";
 

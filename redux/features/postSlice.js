@@ -12,16 +12,18 @@ export const post = createSlice({
       return initialState;
     },
     addPost: (state, action) => {
-      return { posts: [...state.posts, ...action.payload] };
+      return { posts: [...current(state.posts), ...action.payload] };
+    },
+    addNewPost: (state, action) => {
+      return { posts: [...current(state.posts), action.payload] };
     },
     removePost: (state, action) => {
       const copyPostArray = [...current(state.posts)];
-      copyPostArray[action.payload] = null;
-      console.log(copyPostArray);
+      copyPostArray.splice(action.payload, 1);
       return { posts: [...copyPostArray] };
     },
   },
 });
 
-export const { removeAllPost, addPost, removePost } = post.actions;
+export const { removeAllPost, addPost, addNewPost, removePost } = post.actions;
 export const postReducer = post.reducer;

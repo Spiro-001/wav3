@@ -15,3 +15,7 @@ export const isNew = (date) => {
   const timeNow = moment(new Date());
   return timeNow.diff(uploadDate, "hours") < 23;
 };
+
+export const timeNow = () => {
+  return moment().format("YYYY-MM-DD hh:mm:ss");
+};

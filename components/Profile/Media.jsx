@@ -5,11 +5,11 @@ import Footer from "./Footer";
 import LoadingMedia from "./Loading/LoadingMedia";
 import { getPostByUserId } from "@utils/fetch/get/post/getPostByUserId";
 import { useDispatch } from "react-redux";
-import { addPost } from "@redux/features/postSlice";
+import { addPost, clearNull } from "@redux/features/postSlice";
 import { useAppSelector } from "@redux/store";
 
 const Media = ({ user }) => {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [spot, setSpot] = useState(0);
   const [loading, setLoading] = useState(true);
   const postState = useAppSelector((state) => state.postReducer.posts);
@@ -22,14 +22,23 @@ const Media = ({ user }) => {
       setSpot((prev) => prev + process.env.LOAD_POST_AMOUNT);
       setLoading(false);
     };
-    if (postState.length === 0 && user) getPost();
+    if (postState.length === 0 && user) {
+      getPost();
+    }
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (postState) {
+      setPosts(postState);
+    }
+  }, [postState]);
 
   return (
     <Container>
       {loading && <LoadingMedia />}
-      {postState &&
-        postState.map((post, idx) => {
+      {posts &&
+        posts.map((post, idx) => {
           if (post) {
             let type = [];
             if (post.images.length > 1) type = [...type, "PHOTOS"];
@@ -38,8 +47,8 @@ const Media = ({ user }) => {
             return <Post post={{ ...post, type }} idx={idx} key={idx} />;
           }
         })}
-      {!postState[0] && (
-        <span className="flex flex-1 justify-center items-center text-lg">
+      {posts.length === 0 && !loading && (
+        <span className="flex flex-1 justify-center items-center text-lg text-gray-300 font-light">
           This user does not have any post yet.
         </span>
       )}

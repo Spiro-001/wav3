@@ -32,21 +32,6 @@ const Post = ({ post, idx }) => {
       .then((views) => setViews(views.total));
   }, []);
 
-  // const images = [
-  //   {
-  //     link: "https://picsum.photos/id/0/1920/1080",
-  //   },
-  //   {
-  //     link: "https://picsum.photos/id/1/1920/1080",
-  //   },
-  //   {
-  //     link: "https://picsum.photos/id/2/1920/1080",
-  //   },
-  //   {
-  //     link: "https://picsum.photos/id/3/1920/1080",
-  //   },
-  // ];
-
   const handleMoreOptions = () => {
     setOpenMoreOptions((prev) => !prev);
   };
@@ -54,6 +39,8 @@ const Post = ({ post, idx }) => {
   const handleDeletePost = (post) => {
     return deletePostById(post._id);
   };
+
+  console.log(post.body);
 
   return (
     <div className="flex flex-col border dark:border-gray-400 border-gray-100 bg-white dark:bg-black p-6 rounded-lg">
@@ -98,10 +85,10 @@ const Post = ({ post, idx }) => {
             </div>
           </div>
           <div className="flex flex-col gap-y-4 pr-8 pt-2">
-            <Text content={body} />
+            <Text content={post.body} />
             {post.type.includes("PHOTO") && <Photo />}
             {post.type.includes("VIDEO") && <Video />}
-            {post.type.includes("PHOTOS") && <Slideshow images={images} />}
+            {post.type.includes("PHOTOS") && <Slideshow images={post.images} />}
             <MediaBar
               views={views}
               comments={comments}

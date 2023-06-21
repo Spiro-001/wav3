@@ -15,6 +15,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
   const [confirm, setConfirm] = useState(false);
   const [showLength, setShowLength] = useState(false);
   const [steps, setSteps] = useState(0);
+  const [blockAction, setBlockAction] = useState(false);
   const confirmRef = useRef();
   const dispatch = useDispatch();
 
@@ -34,10 +35,12 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
       timeNow(),
       body
     );
+    setBlockAction(true);
+    await new Promise((res) => setTimeout(res, 5000));
     if (createdNewPost) {
       dispatch(addNewPost(createdNewPost));
-      cancelPost();
       setOpenConfirm(false);
+      cancelPost();
       setConfirm(false);
       setBody("");
     }
@@ -105,6 +108,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
               width={48}
               height={48}
               alt="loading"
+              className="select-none"
             />
           </div>
         );
@@ -121,6 +125,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
         setOpenConfirm={setOpenConfirm}
         setConfirm={setConfirm}
         ref={confirmRef}
+        blockAction={blockAction}
       />
     </>
   );

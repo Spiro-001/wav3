@@ -8,6 +8,7 @@ const MoreOptions = ({ options, open, opened, idx }) => {
   const [confirm, setConfirm] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const [onCompleteFunction, setOnCompleteFunction] = useState(() => {});
+
   const moreOptionRef = useRef();
   const confirmActionRef = useRef();
   const dispatch = useDispatch();

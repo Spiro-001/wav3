@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import LoadingMedia from "./Loading/LoadingMedia";
 import { getPostByUserId } from "@utils/fetch/get/post/getPostByUserId";
 import { useDispatch } from "react-redux";
-import { addPost, clearNull } from "@redux/features/postSlice";
+import { addPost, clearNull, post } from "@redux/features/postSlice";
 import { useAppSelector } from "@redux/store";
 
 const Media = ({ user }) => {
@@ -24,8 +24,9 @@ const Media = ({ user }) => {
     };
     if (postState.length === 0 && user) {
       getPost();
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -34,10 +35,13 @@ const Media = ({ user }) => {
     }
   }, [postState]);
 
+  console.log(postState);
+
   return (
     <Container>
-      {loading && <LoadingMedia />}
-      {posts &&
+      {postState.length === 0 && loading && <LoadingMedia />}
+      {!loading &&
+        posts &&
         posts.map((post, idx) => {
           if (post) {
             let type = [];

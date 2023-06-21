@@ -7,6 +7,7 @@ import Video from "./Video";
 import MediaBar from "@components/EffectBar/MediaBar";
 import MoreOptions from "@components/Window/MoreOptions";
 import { deletePostById } from "@utils/fetch/delete/post/deletePostById";
+import { formatDateAgo } from "@utils/numbers/dateAgoFormat";
 
 const Post = ({ post, idx }) => {
   const [like, setLike] = useState(false);
@@ -37,10 +38,11 @@ const Post = ({ post, idx }) => {
   };
 
   const handleDeletePost = (post) => {
+    setOpenMoreOptions(false);
     return deletePostById(post._id);
   };
 
-  console.log(post.body);
+  console.log(post.postOwnerId.username);
 
   return (
     <div className="flex flex-col border dark:border-gray-400 border-gray-100 bg-white dark:bg-black p-6 rounded-lg">
@@ -56,10 +58,14 @@ const Post = ({ post, idx }) => {
           <div className="flex gap-x-2 items-center flex-1">
             <div className="text-xl flex gap-x-2">
               <span>EXXSTACY</span>
-              <span className="font-light text-gray-400 lt">@daniel</span>
+              <span className="font-light text-gray-400 lt">
+                @{post.postOwnerId.username}
+              </span>
             </div>
             <span className="font-light text-gray-400">•</span>
-            <span className="text-lg font-light text-gray-400">1h</span>
+            <span className="text-lg font-light text-gray-400">
+              {formatDateAgo(post.doc)}
+            </span>
             <div className="ml-auto relative">
               <Image
                 src="/PNG/g-more.png"

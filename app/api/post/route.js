@@ -13,17 +13,6 @@ export const POST = async (req, res) => {
     comments,
     highlights,
   } = await req.json();
-  console.log(
-    postOwnerId,
-    doc,
-    updatedAt,
-    body,
-    images,
-    video,
-    likes,
-    comments,
-    highlights
-  );
   try {
     await connectToDB();
     const newPost = await Post.create({

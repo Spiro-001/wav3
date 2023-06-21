@@ -1,5 +1,5 @@
-import firebaseDB from "@utils/firebase/firebase";
-import verify from "@utils/firebase/verify";
+import firebaseDB from "@firebase/firebase";
+import verify from "@firebase/verify";
 
 export const POST = async (req, { params }) => {
   try {

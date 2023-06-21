@@ -9,8 +9,9 @@ export const GET = async (req, { params }) => {
   try {
     await connectToDB();
     const clusterOfPost = await Post.find({ postOwnerId: params.userId })
+      .populate("postOwnerId")
       .sort({
-        doc: "asc",
+        doc: "desc",
       })
       .limit(postLimit) // AMOUNT OF POST TO RETRIEVE
       .skip(spot); // AMOUNT TO SKIP AFTER SORTED

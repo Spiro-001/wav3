@@ -4,7 +4,8 @@ const ConfirmAction = forwardRef((props, ref) => {
   const confirmContainerRef = useRef();
 
   useEffect(() => {
-    if (props.openConfirm && !ref.current.open) ref.current.showModal();
+    if (props.openConfirm && !ref.current.open && !props.blockAction)
+      ref.current.showModal();
   }, [props.openConfirm]);
 
   const confirmCancel = () => {

@@ -14,11 +14,11 @@ const Photo = ({ images }) => {
   console.log(imageLink);
 
   return (
-    <div className="max-h-96 flex border-gray-400 rounded w-full justify-start items-start">
+    <div className="max-h-96 flex h-96 border-gray-400 rounded w-full justify-start items-start flex-col">
       <img
         src={imageLink}
         alt="profile"
-        className="object-contain rounded select-none h-full w-60"
+        className="object-contain rounded select-none h-full"
       />
     </div>
   );

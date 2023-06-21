@@ -41,7 +41,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
       [file.name]
     ).catch((error) => setSteps((prev) => prev - 1));
     setBlockAction(true);
-    await new Promise((res) => setTimeout(res, 5000));
+    // await new Promise((res) => setTimeout(res, 5000));
     if (createdNewPost) {
       dispatch(addNewPost(createdNewPost));
       setOpenConfirm(false);

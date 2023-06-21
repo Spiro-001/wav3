@@ -15,7 +15,7 @@ export const post = createSlice({
       return { posts: [...action.payload] };
     },
     addNewPost: (state, action) => {
-      return { posts: [...current(state.posts), action.payload] };
+      return { posts: [action.payload, ...current(state.posts)] };
     },
     removePost: (state, action) => {
       const copyPostArray = [...current(state.posts)];

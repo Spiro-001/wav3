@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
-  posts: [],
+  posts: null,
 };
 
 export const post = createSlice({
@@ -12,7 +12,7 @@ export const post = createSlice({
       return initialState;
     },
     addPost: (state, action) => {
-      return { posts: [...current(state.posts), ...action.payload] };
+      return { posts: [...action.payload] };
     },
     addNewPost: (state, action) => {
       return { posts: [...current(state.posts), action.payload] };

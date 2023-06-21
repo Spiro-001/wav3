@@ -42,8 +42,6 @@ const Post = ({ post, idx }) => {
     return deletePostById(post._id);
   };
 
-  console.log(post.postOwnerId.username);
-
   return (
     <div className="flex flex-col border dark:border-gray-400 border-gray-100 bg-white dark:bg-black p-6 rounded-lg">
       <div className="flex gap-x-6 flex-1">

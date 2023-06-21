@@ -22,7 +22,7 @@ const Media = ({ user }) => {
       setSpot((prev) => prev + process.env.LOAD_POST_AMOUNT);
       setLoading(false);
     };
-    if (postState.length === 0 && user) {
+    if (!postState && user) {
       getPost();
     } else {
       setLoading(false);
@@ -39,7 +39,7 @@ const Media = ({ user }) => {
 
   return (
     <Container>
-      {postState.length === 0 && loading && <LoadingMedia />}
+      {!postState && <LoadingMedia />}
       {!loading &&
         posts &&
         posts.map((post, idx) => {

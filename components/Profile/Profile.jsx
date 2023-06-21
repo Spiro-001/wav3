@@ -55,7 +55,7 @@ const Profile = (props) => {
             className="object-cover h-full w-full rounded-full select-none"
           />
           <div className="profile-info text-black">
-            <div className="profile-text text-2xl py-1 px-3">
+            <div className="profile-text text-2xl py-1 px-3 whitespace-nowrap">
               {user?.username}
             </div>
           </div>

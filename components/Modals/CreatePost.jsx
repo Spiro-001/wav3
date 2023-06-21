@@ -34,7 +34,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
       timeNow(),
       timeNow(),
       body
-    );
+    ).catch((error) => setSteps((prev) => prev - 1));
     setBlockAction(true);
     await new Promise((res) => setTimeout(res, 5000));
     if (createdNewPost) {
@@ -92,8 +92,9 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
                 Cancel
               </button>
               <button
-                className="border border-blue-500 px-3 rounded-md bg-blue-500 text-white font-semibold text-base"
+                className="border border-blue-500 px-3 rounded-md bg-blue-500 text-white font-semibold text-base disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-400"
                 onClick={handleNextStep}
+                disabled={body.length === 0}
               >
                 Post
               </button>

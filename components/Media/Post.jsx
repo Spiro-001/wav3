@@ -90,7 +90,7 @@ const Post = ({ post, idx }) => {
           </div>
           <div className="flex flex-col gap-y-4 pr-8 pt-2">
             <Text content={post.body} />
-            {post.type.includes("PHOTO") && <Photo />}
+            {post.type.includes("PHOTO") && <Photo images={post.images} />}
             {post.type.includes("VIDEO") && <Video />}
             {post.type.includes("PHOTOS") && <Slideshow images={post.images} />}
             <MediaBar

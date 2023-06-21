@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { timeNow } from "@utils/numbers/dateAgoFormat";
 import { useDispatch } from "react-redux";
 import { addNewPost } from "@redux/features/postSlice";
+import { uploadSPhotoToS3 } from "@aws/s3_aws";
 
 const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
   const { data: session } = useSession();
@@ -16,6 +17,8 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
   const [showLength, setShowLength] = useState(false);
   const [steps, setSteps] = useState(0);
   const [blockAction, setBlockAction] = useState(false);
+  const [file, setFile] = useState();
+
   const confirmRef = useRef();
   const dispatch = useDispatch();
 
@@ -29,11 +32,13 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
   }, [confirm]);
 
   const handleSubmitPost = async () => {
+    const returnData = await uploadSPhotoToS3(file);
     const createdNewPost = await postNewPost(
       session.user.id,
       timeNow(),
       timeNow(),
-      body
+      body,
+      [file.name]
     ).catch((error) => setSteps((prev) => prev - 1));
     setBlockAction(true);
     await new Promise((res) => setTimeout(res, 5000));
@@ -43,6 +48,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
       cancelPost();
       setConfirm(false);
       setBody("");
+      setFile();
     }
   };
 
@@ -74,7 +80,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
                 </span>
               )}
             </div>
-            <DragDropFile />
+            <DragDropFile setFile={setFile} />
             <textarea
               maxLength={250}
               className="txt-area w-full border border-gray-400 rounded focus:outline-blue-400 resize-none py-2 px-2 pb-4 text-sm"

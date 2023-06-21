@@ -1,12 +1,24 @@
-import React from "react";
+import { getSPhotoFromS3 } from "@aws/s3_aws";
+import React, { useEffect, useState } from "react";
 
-const Photo = () => {
+const Photo = ({ images }) => {
+  const [imageLink, setImageLink] = useState("");
+  useEffect(() => {
+    const getImage = async () => {
+      var imageURL = await getSPhotoFromS3(images[0]);
+      setImageLink(imageURL);
+    };
+    getImage();
+  });
+
+  console.log(imageLink);
+
   return (
-    <div className="max-h-96 flex border-gray-400 rounded">
+    <div className="max-h-96 flex border-gray-400 rounded w-full justify-start items-start">
       <img
-        src="https://picsum.photos/1920/1080"
+        src={imageLink}
         alt="profile"
-        className="object-cover rounded select-none"
+        className="object-contain rounded select-none h-full w-60"
       />
     </div>
   );

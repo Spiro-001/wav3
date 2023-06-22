@@ -1,5 +1,11 @@
 export const toEmoji = (body) => {
-  const emojis = { "<3": "❤️" };
+  const emojis = {
+    "<3": "❤️",
+    ":)": "🙂",
+    "=D": "😃",
+    "(:dick)": "🍆",
+    "(:butt)": "🍑",
+  };
   let lengthOfEmoji = 0;
   let currentText = [];
 

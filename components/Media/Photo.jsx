@@ -11,8 +11,6 @@ const Photo = ({ images }) => {
     getImage();
   });
 
-  console.log(imageLink);
-
   return (
     <div className="max-h-96 flex h-96 border-gray-400 rounded w-full justify-start items-start flex-col">
       <img

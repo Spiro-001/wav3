@@ -7,14 +7,16 @@ export const POST = async (req, res) => {
     doc,
     updatedAt,
     body,
-    images,
-    video,
-    likes,
-    comments,
-    highlights,
+    images = [],
+    video = [],
+    likes = [],
+    comments = [],
+    highlights = [],
   } = await req.json();
   try {
     await connectToDB();
+    if ([images, video, likes, comments, highlights].includes(null))
+      throw new Error("Null value found, null is not allowed.");
     const newPost = await Post.create({
       postOwnerId,
       doc,

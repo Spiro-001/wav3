@@ -17,7 +17,7 @@ const DragDropFile = ({ setFile }) => {
           <span className="cursor-pointer">browse</span>
           <input
             type="file"
-            accept="image/png"
+            accept="image/png, image/jpg, image/jpeg"
             className="absolute left-0 opacity-0 w-full cursor-pointer"
             onChange={handleUploadFile}
           />

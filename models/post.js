@@ -26,22 +26,27 @@ const PostSchema = new Schema({
   images: {
     type: [String],
     default: [],
+    required: [true, "Empty array is needed to initialize"],
   },
   video: {
     type: [String],
     default: [],
+    required: [true, "Empty array is needed to initialize"],
   },
   likes: {
     type: [Schema.Types.ObjectId],
     default: [],
+    required: [true, "Empty array is needed to initialize"],
   },
   comments: {
     type: [Schema.Types.ObjectId],
     default: [],
+    required: [true, "Empty array is needed to initialize"],
   },
   highlights: {
     type: [Schema.Types.ObjectId],
     default: [],
+    required: [true, "Empty array is needed to initialize"],
   },
 });
 

@@ -12,7 +12,7 @@ const Photo = ({ images }) => {
   });
 
   return (
-    <div className="max-h-96 flex h-96 border-gray-400 rounded w-full justify-start items-start flex-col">
+    <div className="max-h-96 flex h-96 border-gray-400 border rounded w-fit justify-start items-start flex-col">
       <img
         src={imageLink}
         alt="profile"

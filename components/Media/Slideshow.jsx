@@ -1,10 +1,12 @@
+import { getSPhotoFromS3 } from "@aws/s3_aws";
 import ImageModal from "@components/Modals/ImageModal";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Slideshow = ({ images }) => {
-  const modalRef = useRef();
   const [modalOpen, setModalOpen] = useState(false);
   const [imageSelect, setImageSelect] = useState(0);
+  const [imageLinks, setImageLinks] = useState([]);
+  const modalRef = useRef();
 
   const moreImages = (idx) => {
     if (!modalRef.current.open) modalRef.current.showModal();
@@ -12,8 +14,19 @@ const Slideshow = ({ images }) => {
     setModalOpen(true);
   };
 
+  useEffect(() => {
+    const getImage = async () => {
+      images.forEach(async (image) => {
+        await getSPhotoFromS3(image).then((url) => {
+          setImageLinks((prev) => [...prev, url]);
+        });
+      });
+    };
+    getImage();
+  }, []);
+
   return (
-    <div className="max-h-96 flex border border-gray-500 rounded w-full overflow-hidden gap-x-0.5 bg-gray-500">
+    <div className="max-h-96 h-96 flex border border-gray-500 rounded overflow-hidden gap-x-0.5 bg-transparent w-fit">
       <ImageModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
@@ -22,23 +35,23 @@ const Slideshow = ({ images }) => {
         slideShowCurrent={imageSelect}
         setSlideShowCurrent={setImageSelect}
       />
-      {images.length < 4 &&
-        images.map((image, idx) => (
+      {imageLinks.length < 4 &&
+        imageLinks.map((image, idx) => (
           <img
             key={idx}
-            src={image.link}
+            src={image}
             alt="profile"
             onClick={() => moreImages(idx)}
-            className={`object-cover select-none w-1/${images.length}`}
+            className={`object-contain select-none w-1/${images.length}`}
           />
         ))}
-      {images.length > 3 &&
-        images.map((image, idx) => {
+      {imageLinks.length > 3 &&
+        imageLinks.map((image, idx) => {
           if (idx < 2)
             return (
               <img
                 key={idx}
-                src={image.link}
+                src={image}
                 alt="profile"
                 onClick={() => moreImages(idx)}
                 className={`object-cover select-none w-1/3 cursor-pointer`}
@@ -49,7 +62,7 @@ const Slideshow = ({ images }) => {
               <div className="relative w-1/3" key={1000}>
                 <img
                   key={idx}
-                  src={image.link}
+                  src={image}
                   alt="profile"
                   className={`object-cover select-none`}
                 />

@@ -11,7 +11,7 @@ const MediaBar = ({
   views = 1,
 }) => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between gap-x-1.5">
       <div className="flex gap-x-1.5">
         <span
           className="text-sm bg-white flex border dark:border-white border-black text-black px-2 gap-x-1 items-center cursor-pointer rounded-sm select-none"

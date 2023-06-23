@@ -25,8 +25,6 @@ const page = () => {
     setS3Image(imageURL);
   };
 
-  console.log(s3Image);
-
   return (
     <div>
       <p>upload file:</p>

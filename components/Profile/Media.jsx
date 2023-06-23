@@ -35,14 +35,12 @@ const Media = ({ user }) => {
     }
   }, [postState]);
 
-  console.log(postState);
-
   return (
     <Container>
       {!postState && <LoadingMedia />}
       {!loading &&
         posts &&
-        posts.map((post, idx) => {
+        postState.map((post, idx) => {
           if (post) {
             let type = [];
             if (post.images.length > 1) type = [...type, "PHOTOS"];

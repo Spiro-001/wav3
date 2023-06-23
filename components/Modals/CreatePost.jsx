@@ -33,13 +33,23 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
   }, [confirm]);
 
   const handleSubmitPost = async () => {
-    if (file) await uploadSPhotoToS3(file);
+    let fileName = [];
+    if (file && file.length > 1) {
+      fileName = [];
+      for (let x = 0; x < file.length; x++) {
+        fileName.push(file[x].name);
+        await uploadSPhotoToS3(file[x]);
+      }
+    } else if (file) {
+      fileName = file.name;
+      await uploadSPhotoToS3(file);
+    }
     const createdNewPost = await postNewPost(
       session.user.id,
       timeNow(),
       timeNow(),
       body,
-      file ? [file.name] : undefined
+      file ? [...fileName] : undefined
     ).catch((error) => setSteps((prev) => prev - 1));
     setBlockAction(true);
     // await new Promise((res) => setTimeout(res, 5000));
@@ -89,7 +99,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
             <DragDropFile setFile={setFile} />
             <textarea
               maxLength={250}
-              className="txt-area w-full border border-gray-400 rounded focus:outline-blue-400 resize-none py-2 px-2 pb-4 text-sm"
+              className="txt-area w-full border border-gray-400 rounded focus:outline-blue-400 resize-none py-2 px-2 pb-4 text-sm break-all"
               value={body}
               onChange={handleTyping}
               onFocus={() => setShowLength(true)}

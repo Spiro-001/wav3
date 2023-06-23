@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Photo from "./Photo";
 import Slideshow from "./Slideshow";
 import Text from "./Text";
@@ -20,6 +20,8 @@ const Post = ({ post, idx }) => {
   const [video, setVideo] = useState(post.video);
   const [openMoreOptions, setOpenMoreOptions] = useState(false);
 
+  console.log;
+
   useEffect(() => {
     fetch(`api/demoviews/${post._id}`, {
       method: "POST",
@@ -31,7 +33,7 @@ const Post = ({ post, idx }) => {
           .then((views) => views);
       })
       .then((views) => setViews(views.total));
-  }, []);
+  }, [post]);
 
   const handleMoreOptions = () => {
     setOpenMoreOptions((prev) => !prev);
@@ -43,7 +45,7 @@ const Post = ({ post, idx }) => {
   };
 
   return (
-    <div className="flex flex-col border dark:border-gray-400 border-gray-100 bg-white dark:bg-black p-6 rounded-lg">
+    <div className="flex flex-col border dark:border-gray-400 border-gray-100 bg-white dark:bg-black p-6 rounded-lg xl:w-9/12 lg:w-3/4 m:w-full sm:w-full">
       <div className="flex gap-x-6 flex-1">
         <div className="w-12 h-12">
           <img

@@ -15,6 +15,15 @@ export const GET = async (req, { params }) => {
       })
       .limit(postLimit) // AMOUNT OF POST TO RETRIEVE
       .skip(spot); // AMOUNT TO SKIP AFTER SORTED
+
+    clusterOfPost.forEach((post) => {
+      post.postOwnerId.password_digest = "SECRET";
+    });
+
+    console.log(clusterOfPost);
+    // clusterOfPost.postOwnerId.password_digest = "SECRET";
     return new Response(JSON.stringify(clusterOfPost), { status: 200 });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };

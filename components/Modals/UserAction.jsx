@@ -31,7 +31,7 @@ const UserAction = ({ open, close }) => {
   return (
     <dialog
       ref={userActionRef}
-      className="bg-transparent h-2/4 w-full justify-center"
+      className="bg-transparent h-3/5 w-full justify-center"
     >
       <div
         ref={contentActionRef}

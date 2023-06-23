@@ -17,7 +17,7 @@ export const POST = async (req, res) => {
     await connectToDB();
     if ([images, video, likes, comments, highlights].includes(null))
       throw new Error("Null value found, null is not allowed.");
-    const newPost = await Post.create({
+    let newPost = await Post.create({
       postOwnerId,
       doc,
       updatedAt,
@@ -28,6 +28,8 @@ export const POST = async (req, res) => {
       comments,
       highlights,
     });
+    newPost = await newPost.populate("postOwnerId");
+    newPost.postOwnerId.password_digest = "SECRET";
     return new Response(JSON.stringify(newPost), { status: 200 });
   } catch (error) {
     return new Response("Could not create your post", { status: 500 });

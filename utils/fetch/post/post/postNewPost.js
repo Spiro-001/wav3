@@ -9,7 +9,6 @@ export const postNewPost = async (
   comments,
   highlights
 ) => {
-  console.log(postOwnerId, doc, updatedAt, body);
   const newPost = await fetch("/api/post", {
     method: "POST",
     body: JSON.stringify({

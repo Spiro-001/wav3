@@ -41,7 +41,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
         await uploadSPhotoToS3(file[x]);
       }
     } else if (file) {
-      fileName = file.name;
+      fileName = [file.name];
       await uploadSPhotoToS3(file);
     }
     const createdNewPost = await postNewPost(
@@ -87,7 +87,7 @@ const CreatePost = ({ openConfirm, setOpenConfirm, close, modalRef }) => {
     switch (steps) {
       case 0:
         return (
-          <div className="h-full w-full py-3 px-4 flex flex-col gap-y-2 justify-between">
+          <div className="h-full w-full py-3 px-4 flex flex-col gap-y-2 justify-between relative">
             <div className="flex justify-between items-center">
               <span className="font-bold">What's on your mind?</span>
               {showLength && (

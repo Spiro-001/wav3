@@ -22,7 +22,9 @@ const Slideshow = ({ images }) => {
         });
       });
     };
-    getImage();
+    if (imageLinks.length === 0) {
+      getImage();
+    }
   }, []);
 
   return (
@@ -31,7 +33,7 @@ const Slideshow = ({ images }) => {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         ref={modalRef}
-        images={images}
+        images={imageLinks}
         slideShowCurrent={imageSelect}
         setSlideShowCurrent={setImageSelect}
       />
@@ -42,7 +44,7 @@ const Slideshow = ({ images }) => {
             src={image}
             alt="profile"
             onClick={() => moreImages(idx)}
-            className={`object-contain select-none w-1/${images.length}`}
+            className={`object-contain select-none w-1/${images.length} cursor-pointer`}
           />
         ))}
       {imageLinks.length > 3 &&

@@ -3,7 +3,6 @@ export const getPostByUserId = async (user, spot) => {
     `http://localhost:3000/api/post/user/${user.id}?amount=${process.env.LOAD_POST_AMOUNT}&spot=${spot}`
   )
     .then((res) => {
-      console.log(res);
       return res.json();
     })
     .then((posts) => posts);

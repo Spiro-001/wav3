@@ -42,3 +42,22 @@ export const getSPhotoFromS3 = async (photoId) => {
     return error;
   }
 };
+
+export const deleteSPhotoFromS3 = async (photoId) => {
+  try {
+    s3Client.deleteObject(
+      {
+        Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
+        Key: photoId,
+      },
+      (err, data) => {
+        if (err) console.log(err, err.stack);
+        else console.log("S3 Item was deleted.");
+      }
+    );
+    return;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};

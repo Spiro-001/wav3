@@ -45,6 +45,7 @@ export const getSPhotoFromS3 = async (photoId) => {
 
 export const deleteSPhotoFromS3 = async (photoId) => {
   try {
+    s3Client.getDe;
     s3Client.deleteObject(
       {
         Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
